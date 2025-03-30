@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Emotion Detection</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f0f0f0; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            text-align: center; 
+        }
+        h1 { 
+            color: #333; 
+        }
+        .video-container { 
+            margin: 20px 0; 
+            background: white; 
+            padding: 10px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        img { 
+            max-width: 100%; 
+            border-radius: 4px; 
+        }
+        .error { 
+            color: red; 
+            margin: 10px 0; 
+            font-weight: bold;
+        }
+        .status { 
+            color: green; 
+            margin: 10px 0; 
+            font-weight: bold;
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-time Emotion Detection</h1>
+        <div class="video-container">
+            <img src="{{ url_for('video_feed') }}" alt="Video feed">
+        </div>
+        <div class="info">
+            <h3>About this Demo:</h3>
+            <p>This is a demonstration of real-time emotion detection using your webcam. The system will:</p>
+            <ul>
+                <li>Detect faces in real-time</li>
+                <li>Draw a green rectangle around detected faces</li>
+                <li>Display simulated emotions (for demonstration purposes)</li>
+            </ul>
+            <p><strong>Note:</strong> This is a demonstration using simulated emotions. For real emotion detection, you would need to implement a machine learning model.</p>
+        </div>
+        <p class="error" id="error-message"></p>
+        <p class="status" id="status-message">Initializing camera...</p>
+    </div>
+    <script>
+        // Check if video feed is loading
+        const img = document.querySelector('img');
+        const statusMessage = document.getElementById('status-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        img.onload = function() {
+            statusMessage.textContent = 'Camera feed is active';
+            errorMessage.textContent = '';
+        };
+        
+        img.onerror = function() {
+            statusMessage.textContent = '';
+            errorMessage.textContent = 'Error: Could not load video feed. Please check your camera permissions.';
+        };
+    </script>
+</body>
+</html> 
